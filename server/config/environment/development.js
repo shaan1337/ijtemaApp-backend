@@ -7,12 +7,12 @@ module.exports = {
 
   // Sequelize connection opions
   sequelize: {
-    uri: 'sqlite://',
+    uri: 'mysql://root:@127.0.0.1:3306/ijtema',
     options: {
       logging: false,
-      storage: 'dev.sqlite',
+      storage: 'mysql',
       define: {
-        timestamps: false
+      timestamps: false
       }
     }
   },
