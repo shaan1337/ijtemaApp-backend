@@ -27,10 +27,12 @@ export class LeaderboardComponent {
       );
     }
 
-    $scope.updatePoints = function(team){
-      team.score = parseInt(team.score);
+    $scope.updatePoints = function(team){      
+      var patches = [
+        {op: 'replace', path: '/score', value: parseInt(team.score)}
+      ];
 
-      $http.patch('/api/leaderboard/'+team._id, team)
+      $http.patch('/api/leaderboard/'+team._id, patches)
       .then(
       (res) => {
         console.log(res);

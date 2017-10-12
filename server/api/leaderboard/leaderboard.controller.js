@@ -114,9 +114,7 @@ export function patch(req, res) {
     Reflect.deleteProperty(req.body, '_id');
   }
 
-  console.log(req.params.id);
-  console.log(req.body);
-  
+ 
   return Leaderboard.find({
     where: {
       _id: req.params.id
