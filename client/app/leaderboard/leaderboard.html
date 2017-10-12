@@ -5,23 +5,29 @@
 
         <table class="table table-striped table-responsive">
             <tr>
+                <th>Rank</th>
                 <th>Team</th>
                 <th>Score</th>
                 <th>Action</th>
             </tr>
             <tr ng-repeat="team in teams track by $index">
+                <td>{{ team.rank }}</td>
                 <td>{{ team.team }}</td>
                 <td>
                     <input name="points" type="text" ng-model="team.score">
                 </td>
                 <td>
-                    <input class="btn btn-primary" type="button" value="Update Score" ng-click="updatePoints(team)">
                     <input class="btn btn-danger" type="button" value="Delete Team" ng-click="deleteTeam(team._id)">                    
                 </td>
             </tr>
         </table>
-        <input style="text-transform: uppercase" name="team" ng-model="teamname" type="text" placeholder="Team name">
-        <input ng-disabled="teamname.length==0" class="btn btn-primary" type="button" value="Add team" ng-click="addTeam()">
+        <div style="float:left; margin: 10px;">
+            <input style="text-transform: uppercase" name="team" ng-model="teamname" type="text" placeholder="Team name">
+            <input ng-disabled="teamname.length==0" class="btn btn-primary" type="button" value="Add team" ng-click="addTeam()">
+        </div>
+        <div style="float: left; margin: 10px;">
+            <input class="btn btn-primary" type="button" value="Update all scores" ng-click="updatePoints()">                
+        </div>            
         </div>
     </div>
 </div>

@@ -66,7 +66,32 @@ function handleError(res, statusCode) {
 
 // Gets a list of Leaderboards
 export function index(req, res) {
-  return Leaderboard.findAll()
+  return Leaderboard.findAll({raw: true})
+    .then(function(teams){
+      teams.sort(function(a,b){
+        if(a.score!=b.score)
+          return b.score - a.score;
+        
+        return a.team > b.team; 
+      });
+
+      var count = 1;
+      var prevScore = -1;
+      var prevRank = 1;
+      for(var team in teams){
+        if(teams[team].score == prevScore){
+          teams[team].rank = prevRank;
+        }
+        else{
+          teams[team].rank = count;
+        }
+
+        prevScore = teams[team].score;
+        prevRank = teams[team].rank;
+        count++;
+      }
+      return teams;
+    })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

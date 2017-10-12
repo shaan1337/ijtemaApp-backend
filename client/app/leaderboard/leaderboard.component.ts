@@ -27,23 +27,26 @@ export class LeaderboardComponent {
       );
     }
 
-    $scope.updatePoints = function(team){      
-      var patches = [
-        {op: 'replace', path: '/score', value: parseInt(team.score)}
-      ];
+    $scope.updatePoints = function(){
+      for(var teamName in $scope.teams){
+        var team = $scope.teams[teamName];
 
-      $http.patch('/api/leaderboard/'+team._id, patches)
-      .then(
-      (res) => {
-        console.log(res);
-        alert('Successfully updated!');
-        ctx.loadTeams($scope,$http);
-      },
-      (res) => {
-        alert('Error!');
-        console.log(res);
+        var patches = [
+          {op: 'replace', path: '/score', value: parseInt(team.score)}
+        ];
+
+        $http.patch('/api/leaderboard/'+team._id, patches)
+        .then(
+        (res) => {
+          ctx.loadTeams($scope,$http);
+        },
+        (res) => {
+          alert('Error, please try again!');
+          console.log(res);
+        }
+        );
       }
-      );
+  
     }
     
     $scope.deleteTeam = function(teamId){
