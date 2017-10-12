@@ -11,7 +11,11 @@ export class NavbarComponent {
   {
     'title': 'Leaderboard',
     'state': 'leaderboard'
-  },  
+  },
+  {
+    'title': 'News',
+    'state': 'news'
+  }  
   ];
   isLoggedIn: Function;
   isAdmin: Function;

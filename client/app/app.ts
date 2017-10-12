@@ -24,7 +24,7 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import LeaderboardComponent from './leaderboard/leaderboard.component';
-
+import NewsComponent from './news/news.component';
 
 import './app.scss';
 
@@ -47,7 +47,8 @@ angular.module('ijtemaAppBackendApp', [
   constants,
 
   util,
-  LeaderboardComponent
+  LeaderboardComponent,
+  NewsComponent
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
