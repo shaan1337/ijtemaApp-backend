@@ -85,6 +85,11 @@ export function show(req, res) {
 
 // Creates a new News in the DB
 export function create(req, res) {
+  req.body.author = 'John Smith';
+  var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T',' ');
+  req.body.date = localISOTime;
+
   return News.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

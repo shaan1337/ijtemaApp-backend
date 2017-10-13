@@ -11,6 +11,21 @@ export class NewsComponent {
     $scope.author = 'John Smith';
     $scope.subject = '';
     $scope.message = '';
+
+    $scope.submitNews = function(){
+      $http.post('/api/news',{subject: $scope.subject, message: $scope.message})
+      .then(
+      (res) => {        
+        alert('Successfully submitted!');
+        $scope.subject = '';
+        $scope.message = '';
+      },
+      (res) => {
+        alert('Error!');
+        console.log(res);
+      }
+      );
+    }
     
   }
 }
