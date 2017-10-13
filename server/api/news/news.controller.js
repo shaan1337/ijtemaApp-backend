@@ -11,6 +11,7 @@
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
+import moment from 'moment';
 import {News} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
@@ -66,7 +67,15 @@ function handleError(res, statusCode) {
 
 // Gets a list of Newss
 export function index(req, res) {
-  return News.findAll()
+  return News.findAll({raw: true})
+    .then(function(items){
+      for(var key in items){
+        var item = items[key];
+        item.timeElapsed = moment(item.date).fromNow();
+        item.date = moment(item.date).format('lll');
+      }
+      return items;
+    })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -86,9 +95,7 @@ export function show(req, res) {
 // Creates a new News in the DB
 export function create(req, res) {
   req.body.author = 'John Smith';
-  var tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
-  var localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0,19).replace('T',' ');
-  req.body.date = localISOTime;
+  req.body.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
 
   return News.create(req.body)
     .then(respondWithResult(res, 201))
