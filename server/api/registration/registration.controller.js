@@ -130,47 +130,46 @@ export function destroy(req, res) {
 
 //Download sport registrations
 export function sport(req, res) {
+  return downloadRegistrations(req,res,'sport','registrations_sport.csv');
+}
+
+//Download literary registrations
+export function literary(req, res) {
+  return downloadRegistrations(req,res,'literary','registrations_literary.csv');
+}
+
+var downloadRegistrations = function(req,res,type,filename){
   return Registration.findAll({
+    raw: true,
     where: {
       deleted: false
     },
     include: [
-      {model: Competition, where: {type: 'sport'}},
+      {model: Competition, where: {type: type}},
       {model: Personaldetails}]
   })
   .then(function(registrations){
     var data = [];
     for(var item in registrations){
-      var reg = res[item];
+      var reg = registrations[item];
       data.push({
-        date: reg.date,
-        name: reg.Personaldetail.fullname,
-        mobile: reg.Personaldetail.mobile,
-        majlis: reg.Personaldetail.majlis,
-        halqa: reg.Personaldetail.halqa,
+        id: reg._id,
+        date: moment(reg.date).format("YYYY-MM-DD HH:mm:ss"),
+        name: reg['Personaldetail.fullname'],
+        mobile: reg['Personaldetail.mobile'],
+        majlis: reg['Personaldetail.majlis'],
+        halqa: reg['Personaldetail.halqa'],
         competition: reg.tag,
         comment: reg.comment,
-        type: reg.Competition.type
+        type: reg['Competition.type']
       });
     };
-    var result = json2csv({ data: data, fields: ['date','name','mobile','majlis','halqa','competition','comment','type'] });
-    return registrations;
-  })
-  .then(respondWithResult(res))
-  .catch(handleError(res));
-}
+    var result = json2csv({ data: data, fields: ['id','date','name','mobile','majlis','halqa','competition','comment','type'] });
+    
+    res.setHeader('Content-disposition', 'attachment; filename='+filename);
+    res.setHeader('Content-type', 'text/csv');
 
-//Download literary registrations
-export function literary(req, res) {
-  return Registration.findAll({
-    where: {
-      deleted: false
-    },
-    include: [
-      {model: Competition, where: {type: 'literary'}},
-      {model: Personaldetails}]
+    return res.status(200).send(result);
   })
-  .then(respondWithResult(res))
-  .catch(handleError(res));
+  .catch(handleError(res));  
 }
-  
