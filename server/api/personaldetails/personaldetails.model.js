@@ -9,7 +9,7 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     token: DataTypes.STRING,
-    fullname: DataTypes.STRING,
+    name: DataTypes.STRING,
     mobile: DataTypes.STRING,
     majlis: DataTypes.STRING,
     halqa: DataTypes.STRING,    

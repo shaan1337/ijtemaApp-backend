@@ -155,7 +155,7 @@ var downloadRegistrations = function(req,res,type,filename){
       data.push({
         id: reg._id,
         date: moment(reg.date).format("YYYY-MM-DD HH:mm:ss"),
-        name: reg['Personaldetail.fullname'],
+        name: reg['Personaldetail.name'],
         mobile: reg['Personaldetail.mobile'],
         majlis: reg['Personaldetail.majlis'],
         halqa: reg['Personaldetail.halqa'],

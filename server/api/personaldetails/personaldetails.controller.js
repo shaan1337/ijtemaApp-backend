@@ -55,7 +55,7 @@ function handleError(res, statusCode) {
 }
 
 // Creates a new Personaldetails in the DB
-export function create(req, res) {
+export function create(req, res) {  
   req.body.token = generateRandomToken();
   req.body.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
   
@@ -69,7 +69,6 @@ export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-
   var token = '';
   if(req.params.token)
     token = req.params.token;
