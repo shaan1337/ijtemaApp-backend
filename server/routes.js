@@ -12,7 +12,7 @@ export default function(app) {
   app.all('/api/*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH")
+    res.header("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE")
     next();
   });
   
@@ -22,7 +22,6 @@ export default function(app) {
   app.use('/api/news', require('./api/news'));
   app.use('/api/leaderboard', require('./api/leaderboard'));
   app.use('/api/programme', require('./api/programme'));
-  app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth').default);

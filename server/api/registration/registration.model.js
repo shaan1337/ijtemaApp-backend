@@ -10,6 +10,7 @@ export default function(sequelize, DataTypes) {
     },
     tag: DataTypes.STRING,
     comment: DataTypes.STRING,
+    members: DataTypes.STRING,
     deleted: DataTypes.BOOLEAN,
     date: DataTypes.DATE
   });

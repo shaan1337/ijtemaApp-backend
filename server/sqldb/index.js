@@ -19,7 +19,6 @@ db.Personaldetails = db.sequelize.import('../api/personaldetails/personaldetails
 db.Registration = db.sequelize.import('../api/registration/registration.model');
 db.News = db.sequelize.import('../api/news/news.model');
 db.Leaderboard = db.sequelize.import('../api/leaderboard/leaderboard.model');
-db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
 db.Registration.belongsTo(db.Personaldetails);

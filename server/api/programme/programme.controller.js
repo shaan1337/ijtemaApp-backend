@@ -11,7 +11,7 @@ var programme =  [
   { type: 'program', time: '13:45', title: 'Hoisting of Flag & Du\'a' },
   { type: 'competition', time: '14:00', title: 'Fun Games',
     competitions: [
-      {name: 'Domino (Preliminary Round)', tag: 'domino', teamsize: 2},
+      {name: 'Domino (Preliminary Round)', tag: 'domino', teamsize: 2, type: 'sport'},
       {name: 'Carrom', tag: 'carrom'},
       {name: 'Dart', tag: 'dart'},
       {name: 'Foot for Fun', tag: 'foot-for-fun'}
@@ -42,4 +42,8 @@ var programme =  [
 
 export function show(req, res) {
   res.status(200).json(programme);
+}
+
+export function getProgramme(){
+  return programme;
 }
