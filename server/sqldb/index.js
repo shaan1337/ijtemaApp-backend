@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+db.FirebaseRegistration = db.sequelize.import('../api/firebase-registration/firebase-registration.model');
 db.Competition = db.sequelize.import('../api/competition/competition.model');
 db.Personaldetails = db.sequelize.import('../api/personaldetails/personaldetails.model');
 db.Registration = db.sequelize.import('../api/registration/registration.model');

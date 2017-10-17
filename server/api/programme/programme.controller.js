@@ -6,7 +6,7 @@
 'use strict';
 
 var programme =  [ 
-  { type: 'day', date: '2017-09-23', title:'Friday 28th October'},
+  { type: 'day', date: '2017-10-17', title:'Friday 17th October'},
   { type: 'program', time: '10:00', title: 'Jummah Prayer with Asr' },
   { type: 'program', time: '13:45', title: 'Hoisting of Flag & Du\'a' },
   { type: 'competition', time: '14:00', title: 'Fun Games',
@@ -30,7 +30,7 @@ var programme =  [
       {name: 'PlayStation', tag: 'playstation'}
   ]},   
   { type: 'program', time: '19:00', endTime: '21:00', title: 'Refreshments' },
-  { type: 'day', date: '2017-09-24', title:'Saturday 29th October'},    
+  { type: 'day', date: '2017-10-18', title:'Saturday 18th October'},    
   { type: 'competition', time: '19:00', title: 'Competitions - Open to All',
     competitions: [
       {name: 'Domino (Atfaal)', tag: 'domino-atfaal'}
@@ -39,7 +39,7 @@ var programme =  [
   { type: 'program', time: '19:00', title: 'Ahad' },
   { type: 'program',  time: '19:00', endTime: '21:00', title: 'Refreshments' }    
 ];
-
+//programme = [];
 export function show(req, res) {
   res.status(200).json(programme);
 }

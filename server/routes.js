@@ -17,6 +17,7 @@ export default function(app) {
   });
   
   // Insert routes below
+  app.use('/api/firebase-registrations', require('./api/firebase-registration'));
   app.use('/api/personaldetails', require('./api/personaldetails'));
   app.use('/api/registrations', require('./api/registration'));
   app.use('/api/news', require('./api/news'));

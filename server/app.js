@@ -9,7 +9,7 @@ import sqldb from './sqldb';
 import config from './config/environment';
 import http from 'http';
 import seedDatabaseIfNeeded from './config/seed';
-import firebaseAdmin from "firebase-admin";
+import firebaseAdmin from './firebase/';
 
 // Setup server
 var app = express();

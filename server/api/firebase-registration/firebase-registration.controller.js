@@ -1,19 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/news              ->  index
- * POST    /api/news              ->  create
- * GET     /api/news/:id          ->  show
- * PUT     /api/news/:id          ->  upsert
- * PATCH   /api/news/:id          ->  patch
- * DELETE  /api/news/:id          ->  destroy
+ * GET     /api/firebase-registrations              ->  index
+ * POST    /api/firebase-registrations              ->  create
+ * GET     /api/firebase-registrations/:id          ->  show
+ * PUT     /api/firebase-registrations/:id          ->  upsert
+ * PATCH   /api/firebase-registrations/:id          ->  patch
+ * DELETE  /api/firebase-registrations/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import moment from 'moment';
-import {News, FirebaseRegistration} from '../../sqldb';
-import firebaseAdmin from '../../firebase';
+import {FirebaseRegistration} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,24 +64,16 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Newss
+// Gets a list of FirebaseRegistrations
 export function index(req, res) {
-  return News.findAll({raw: true})
-    .then(function(items){
-      for(var key in items){
-        var item = items[key];
-        item.timeElapsed = moment(item.date).fromNow();
-        item.date = moment(item.date).format('lll');
-      }
-      return items;
-    })
+  return FirebaseRegistration.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single News from the DB
+// Gets a single FirebaseRegistration from the DB
 export function show(req, res) {
-  return News.find({
+  return FirebaseRegistration.find({
     where: {
       _id: req.params.id
     }
@@ -93,24 +83,20 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new News in the DB
+// Creates a new FirebaseRegistration in the DB
 export function create(req, res) {
-  req.body.author = 'John Smith';
-  req.body.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
-
-  return News.create(req.body)
+  return FirebaseRegistration.create(req.body)
     .then(respondWithResult(res, 201))
-    .then(sendNotifications(req.body))
     .catch(handleError(res));
 }
 
-// Upserts the given News in the DB at the specified ID
+// Upserts the given FirebaseRegistration in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
 
-  return News.upsert(req.body, {
+  return FirebaseRegistration.upsert(req.body, {
     where: {
       _id: req.params.id
     }
@@ -119,12 +105,12 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
-// Updates an existing News in the DB
+// Updates an existing FirebaseRegistration in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return News.find({
+  return FirebaseRegistration.find({
     where: {
       _id: req.params.id
     }
@@ -135,9 +121,9 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a News from the DB
+// Deletes a FirebaseRegistration from the DB
 export function destroy(req, res) {
-  return News.find({
+  return FirebaseRegistration.find({
     where: {
       _id: req.params.id
     }
@@ -145,34 +131,4 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
-}
-
-function sendNotifications(body){
-  console.log('Sending news notifications!');
-
-  FirebaseRegistration.aggregate('token', 'DISTINCT', { plain: false })
-  .then((tokens)=>{
-    var registrationTokens = [];
-    for(var key in tokens){
-      var token = tokens[key]['DISTINCT'];
-      if(token && token.length>0)
-        registrationTokens.push(token);
-    }
-    
-    var payload = {      
-      notification: {
-        title: body.subject,
-        body: body.author+(body.message.length>0?(':\n'+body.message):'')
-      }
-    };
-
-    firebaseAdmin.messaging().sendToDevice(registrationTokens, payload)
-      .then(function(response) {
-        console.log("Successfully sent message:", response);
-      })
-      .catch(function(error) {
-        console.log("Error sending message:", error);
-      });
-        
-  });
 }
