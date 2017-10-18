@@ -68,11 +68,21 @@ function handleError(res, statusCode) {
 
 // Gets a list of Newss
 export function index(req, res) {
-  return News.findAll({raw: true})
+  var from = req.params.from;
+  var where = {};
+  if(from){
+    where = {
+      _id: {
+        $gt: from
+      }
+    }
+  }
+
+  return News.findAll({raw: true, where:where})
     .then(function(items){
       for(var key in items){
         var item = items[key];
-        item.timeElapsed = moment(item.date).fromNow();
+        item.dateUTC = item.date;
         item.date = moment(item.date).format('lll');
       }
       return items;
