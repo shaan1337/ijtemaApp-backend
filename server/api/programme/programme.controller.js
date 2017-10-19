@@ -39,7 +39,7 @@ var programme =  [
   { type: 'program', time: '19:00', title: 'Ahad' },
   { type: 'program',  time: '19:00', endTime: '21:00', title: 'Refreshments' }    
 ];
-//programme = [];
+
 export function show(req, res) {
   res.status(200).json(programme);
 }

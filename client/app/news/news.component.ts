@@ -7,13 +7,24 @@ import routes from './news.routes';
 
 export class NewsComponent {
   /*@ngInject*/
-  constructor($scope,$http) {
-    $scope.author = 'John Smith';
+  constructor($scope,$http, Auth) {
+    Auth.getCurrentUser().then(function(me) {
+      $scope.author = me.name;
+    });
+
     $scope.subject = '';
     $scope.message = '';
+    $scope.link = '';
+    $scope.linkName = '';
 
     $scope.submitNews = function(){
-      $http.post('/api/news',{subject: $scope.subject, message: $scope.message})
+      $http.post('/api/news',
+      {
+        subject: $scope.subject,
+        message: $scope.message,
+        link: $scope.link,
+        linkName: $scope.linkName
+      })
       .then(
       (res) => {        
         alert('Successfully submitted!');

@@ -4,25 +4,40 @@
             <h1 class="page-header">News</h1>
             
             <div class="form-container">
-                <div>
-                    <label for="author">Author:</label>
-                    {{ author }}
-                </div>
+                <form name="form">                            
+                    <div>
+                        <label for="author">Author:</label>
+                        {{ author }}
+                    </div>
 
-                <div>
-                    <label for="subject">Subject:</label>
-                    <input name="subject" type="text" placeholder="Add a subject" ng-model="subject" style="width: 300px">                
-                </div>
+                    <div>
+                        <label for="subject">Subject:</label>
+                        <input name="subject" type="text" placeholder="Add a subject" ng-model="subject" style="width: 300px">                
+                    </div>
 
-                <label for="message">Message:</label>                
-                <div>
-                    <textarea name="message" rows="10" cols="80" placeholder="Type your message" ng-model="message">                    
-                    </textarea>
-                </div>
+                    <label for="message">Message:</label>                
+                    <div>
+                        <textarea name="message" rows="10" cols="80" placeholder="Type your message" ng-model="message">                    
+                        </textarea>
+                    </div>
 
-                <div>
-                    <input ng-disabled="subject.length==0 || message.length==0" class="btn btn-primary" type="button" value="Submit News" ng-click="submitNews()">                
-                </div>
+                    <div>
+                        <label for="link">Link (Optional):</label>
+                        <input name="link" type="url" placeholder="http://" ng-model="link" style="width: 500px">                
+                        <div ng-show="form.$invalid" style="color:red">
+                            Invalid url
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="linkDescription">Link description (Optional):</label>
+                        <input name="linkDescription" type="text" placeholder="e.g. Literary Competition rules, " ng-model="linkName" style="width: 500px">                
+                    </div>
+
+                    <div>
+                        <input ng-disabled="subject.length==0 || message.length==0 || form.$invalid" class="btn btn-primary" type="button" value="Submit News" ng-click="submitNews()">                
+                    </div>      
+                </form>          
             </div>
 
             </div>

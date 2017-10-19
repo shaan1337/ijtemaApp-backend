@@ -10,12 +10,14 @@ export class NavbarComponent {
   },
   {
     'title': 'Leaderboard',
-    'state': 'leaderboard'
+    'state': 'leaderboard',
+    'requireLogin': true
   },
   {
     'title': 'News',
-    'state': 'news'
-  }  
+    'state': 'news',
+    'requireLogin': true
+  }    
   ];
   isLoggedIn: Function;
   isAdmin: Function;

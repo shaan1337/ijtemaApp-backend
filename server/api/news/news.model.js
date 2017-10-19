@@ -11,6 +11,8 @@ export default function(sequelize, DataTypes) {
     author: DataTypes.STRING,
     subject: DataTypes.STRING,
     message: DataTypes.STRING,
+    link: DataTypes.STRING,
+    linkName: DataTypes.STRING,
     date: DataTypes.DATE
   });
 }

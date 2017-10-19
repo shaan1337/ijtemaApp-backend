@@ -96,18 +96,6 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-// Gets a single Leaderboard from the DB
-export function show(req, res) {
-  return Leaderboard.find({
-    where: {
-      _id: req.params.id
-    }
-  })
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
 // Creates a new Leaderboard in the DB
 export function create(req, res) {
   //initialize with 0 points
@@ -115,21 +103,6 @@ export function create(req, res) {
 
   return Leaderboard.create(req.body)
     .then(respondWithResult(res, 201))
-    .catch(handleError(res));
-}
-
-// Upserts the given Leaderboard in the DB at the specified ID
-export function upsert(req, res) {
-  if(req.body._id) {
-    Reflect.deleteProperty(req.body, '_id');
-  }
-
-  return Leaderboard.upsert(req.body, {
-    where: {
-      _id: req.params.id
-    }
-  })
-    .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
