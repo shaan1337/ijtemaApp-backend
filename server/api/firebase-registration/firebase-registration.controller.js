@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {FirebaseRegistration} from '../../sqldb';
+import moment from 'moment';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -85,6 +86,8 @@ export function show(req, res) {
 
 // Creates a new FirebaseRegistration in the DB
 export function create(req, res) {
+  req.body.date = moment(new Date()).format("YYYY-MM-DD HH:mm:ss");
+  
   return FirebaseRegistration.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

@@ -8,6 +8,7 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    token: DataTypes.STRING
+    token: DataTypes.STRING,
+    date: DataTypes.DATE
   });
 }
