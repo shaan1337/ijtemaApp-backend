@@ -15,13 +15,12 @@ module.exports = {
     || 8080,
 
   sequelize: {
-    uri: process.env.SEQUELIZE_URI
-      || 'sqlite://',
+    uri: 'mysql://root:@127.0.0.1:3306/ijtema',
     options: {
       logging: false,
-      storage: 'dist.sqlite',
+      storage: 'mysql',
       define: {
-        timestamps: false
+      timestamps: false
       }
     }
   }
