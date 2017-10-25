@@ -28,11 +28,11 @@ var programme =  [
   { type: 'program', time: '19:15', title: 'Questions & Answers Session' },
   { type: 'competition', time: '20:05', title: 'Competitions & Fun Games',
     competitions: [
-      {name: 'Tilawat Qur\'an', tag: 'tilawat-quran', link: {text:'View rules',url:'http://ijtema.khuddam.mu/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
-      {name: 'Nazam', tag: 'nazam', link: {text:'View rules',url:'http://ijtema.khuddam.mu/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
-      {name: 'Speech', tag: 'speech', link: {text:'View rules',url:'http://ijtema.khuddam.mu/content/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
+      {name: 'Tilawat Qur\'an', tag: 'tilawat-quran', link: {text:'View rules',url:'http://ijtema.khuddam.mu/rules/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
+      {name: 'Nazam', tag: 'nazam', link: {text:'View rules',url:'http://ijtema.khuddam.mu/rules/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
+      {name: 'Speech', tag: 'speech', link: {text:'View rules',url:'http://ijtema.khuddam.mu/rules/LiteraryCompetitions.pdf'}, type: 'literary', comment: 'Beginners can participate in Pool B'},
       {name: 'Foot Coltar A-3', tag: 'foot-a-3', teamsize: 3, type: 'sport'},
-      {name: 'Chrono Quest', tag: 'chrono-quest', type:'sport'},
+      {name: 'Chrono Quest', tag: 'chrono-quest', type:'sport', comment: 'Caution: This competition involves lifting heavy objects'},
       {name: 'Domino', tag: 'domino-2', teamsize: 2, type: 'sport'},
       {name: 'Carrom', tag: 'carrom-2', teamsize: 2, type: 'sport'}
   ]},
@@ -48,7 +48,7 @@ var programme =  [
     {name: 'Foot A-7', tag: 'foot-a-7', teamsize: 7, type: 'sport'},
     {name: 'Sprint', tag: 'sprint', type:'sport'},
     {name: 'Petanque', tag: 'petanque', type:'sport'},
-    {name: 'Treasure Hunt', tag: 'treasure-hunt', type:'sport'},
+    {name: 'Treasure Hunt', tag: 'treasure-hunt', type:'sport', teamsize: 5},
     {name: 'Swimming Sprint', tag: 'swimming-sprint', type:'sport', comment: 'Swimming pool sessions will start at 11:00'},
   ]},
   { type: 'program', time: '12:00', endTime: '12:45', title: 'Lunch' },
@@ -64,9 +64,9 @@ var programme =  [
   { type: 'program', time: '15:15', title: 'Tea' },
   { type: 'competition', time: '15:15', title: 'Competitions & Indoor Games',
   competitions: [
-    {name: 'Adhan', tag: 'adhan', link: {text:'View rules',url:'http://ijtema.khuddam.mu/LiteraryCompetitions.pdf'}, type: 'literary'},
-    {name: 'Attributes of Allah', tag: 'attributes-of-allah', link: {text:'View rules',url:'http://ijtema.khuddam.mu/LiteraryCompetitions.pdf'}, type: 'literary'},
-    {name: 'Volleyball', tag: 'volley-ball', type:'sport'}
+    {name: 'Adhan', tag: 'adhan', link: {text:'View rules',url:'http://ijtema.khuddam.mu/rules/LiteraryCompetitions.pdf'}, type: 'literary'},
+    {name: 'Attributes of Allah', tag: 'attributes-of-allah', link: {text:'View rules',url:'http://ijtema.khuddam.mu/rules/LiteraryCompetitions.pdf'}, type: 'literary'},
+    {name: 'Volleyball', tag: 'volley-ball', type:'sport', teamsize: 7}
   ]},
   { type: 'program', time: '17:00', title: 'Barbeque' },
   { type: 'program', time: '18:30', title: 'Maghrib & Isha Prayers' },
