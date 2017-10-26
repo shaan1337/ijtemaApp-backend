@@ -130,23 +130,56 @@ export function destroy(req, res) {
 
 //Download sport registrations
 export function sport(req, res) {
-  return downloadRegistrations(req,res,'sport','registrations_sport.csv');
+  return downloadRegistrations(req,res,'sport','all','all','registrations_sport.csv');
 }
 
 //Download literary registrations
 export function literary(req, res) {
-  return downloadRegistrations(req,res,'literary','registrations_literary.csv');
+  return downloadRegistrations(req,res,'literary','all','all','registrations_literary.csv');
 }
 
-var downloadRegistrations = function(req,res,type,filename){
+export function permajlis(req, res) {
+  var majlis = 'none';
+  if(req.params.majlis)
+    majlis = req.params.majlis;
+  
+  if(majlis=='all') majlis='none';
+
+  var halqa = 'all';
+  if(req.params.halqa)
+    halqa = req.params.halqa;
+
+  var type = 'all';
+  return downloadRegistrations(req,res,type,majlis,halqa,'registrations.csv');
+}
+
+
+var downloadRegistrations = function(req,res,type,majlis,halqa,filename){
+  var queryCompetition = {model: Competition};  
+  if(type!='all'){
+    if(!queryCompetition.where) queryCompetition.where = {};    
+    queryCompetition.where.type = type;
+  }
+
+  var queryPersonalDetails = {model: Personaldetails};
+  if(majlis!='all'){
+    if(!queryPersonalDetails.where) queryPersonalDetails.where = {};
+    queryPersonalDetails.where.majlis = majlis;
+  }
+  if(halqa!='all'){
+    if(!queryPersonalDetails.where) queryPersonalDetails.where = {};
+    queryPersonalDetails.where.halqa = halqa;
+  }
+
   return Registration.findAll({
     raw: true,
     where: {
       deleted: false
     },
     include: [
-      {model: Competition, where: {type: type}},
-      {model: Personaldetails}]
+      queryCompetition,
+      queryPersonalDetails
+    ]
   })
   .then(function(registrations){
     var data = [];

@@ -36,9 +36,10 @@ export default function seedDatabaseIfNeeded() {
       }
     }
 
-    Competition.destroy({ where: {} })
+    //TODO: fix bug: Ids change when destroying/recreating table.
+    /*Competition.destroy({ where: {} })
     .then(() => Competition.bulkCreate(competitionData)
     .then(() => console.log('finished populating competitions'))
-    .catch(err => console.log('error populating competitions', err)));
+    .catch(err => console.log('error populating competitions', err)));*/
   }
 }

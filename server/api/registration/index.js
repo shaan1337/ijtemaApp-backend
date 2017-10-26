@@ -7,8 +7,9 @@ var controller = require('./registration.controller');
 
 var router = express.Router();
 
-router.get('/sport', auth.isAuthenticated(), controller.sport);
-router.get('/literary', auth.isAuthenticated(), controller.literary);
+router.get('/sport', controller.sport);
+router.get('/literary', controller.literary);
+router.get('/:majlis/:halqa', controller.permajlis);
 router.post('/:token', controller.create);
 router.delete('/:id/:token', controller.destroy);
 
