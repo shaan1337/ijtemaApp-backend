@@ -9,7 +9,7 @@ import config from './environment/';
 
 var programmeController = require('../api/programme/programme.controller')
 
-export default function seedDatabaseIfNeeded() {
+export default async function seedDatabaseIfNeeded() {
   if(config.seedDB) {
     let Competition = sqldb.Competition;
     var programme = programmeController.getProgramme();
@@ -36,10 +36,10 @@ export default function seedDatabaseIfNeeded() {
       }
     }
 
-    //TODO: fix bug: Ids change when destroying/recreating table.
-    /*Competition.destroy({ where: {} })
-    .then(() => Competition.bulkCreate(competitionData)
-    .then(() => console.log('finished populating competitions'))
-    .catch(err => console.log('error populating competitions', err)));*/
+    for(var i=0;i<competitionData.length;i++){
+      console.log('Adding competition: '+competitionData[i].tag);
+      await Competition.upsert(competitionData[i]);
+    }
+    console.log('finished populating competitions!');
   }
 }
