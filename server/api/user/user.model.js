@@ -174,11 +174,11 @@ export default function(sequelize, DataTypes) {
 
         if(!callback) {
           // eslint-disable-next-line no-sync
-          return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
+          return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength,'sha1')
                        .toString('base64');
         }
 
-        return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength,
+        return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength,'sha1',
           function(err, key) {
             if(err) {
               callback(err);
