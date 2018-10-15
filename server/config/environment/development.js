@@ -12,7 +12,9 @@ module.exports = {
       logging: false,
       storage: 'mysql',
       define: {
-      timestamps: false
+      timestamps: false,
+      charset: 'utf8',
+      collate: 'utf8_general_ci'
       }
     }
   },
