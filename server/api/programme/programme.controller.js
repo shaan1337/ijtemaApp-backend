@@ -44,7 +44,7 @@ var programme =  [
   { type: 'program', time: '19:25', title: 'FORUM: \'OUR GOD\'', important: true },
   { type: 'competition', time: '20:20', title: 'Quiz Competition',
   competitions: [
-    {name: 'Quiz - Majlis representatives', tag: 'quiz-official', teamsize: 4, type: 'literary'},
+    {name: 'Quiz - Majlis representatives', tag: 'quiz-official', teamsize: 3, type: 'literary'},
     {name: 'Quiz - Audience', tag: 'quiz-audience', type: 'literary'},
   ]
   },
