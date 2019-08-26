@@ -103,11 +103,12 @@ function sendNotifications(body){
       if(token && token.length>0)
         registrationTokens.push(token);
     }
-    
-    var payload = {      
+
+    var payload = {
       notification: {
         title: body.subject,
-        body: body.author+(body.message.length>0?(':\n'+body.message):'')
+        body: body.author+(body.message.length>0?(':\n'+body.message):''),
+        sound: 'default'
       }
     };
 
@@ -118,6 +119,6 @@ function sendNotifications(body){
       .catch(function(error) {
         console.log("Error sending message:", error);
       });
-        
+
   });
 }
